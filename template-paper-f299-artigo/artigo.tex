@@ -157,13 +157,45 @@ O trabalho de \cite{Arifani2024} propõe um protótipo de monitoramento da quali
 Em termos de semelhanças metodológicas, os três trabalhos analisados fundamentam-se no uso de microcontroladores de baixo custo (ESP32, Arduino e módulos ESP8266) como núcleos de processamento, priorizam o monitoramento contínuo de parâmetros físico-químicos vitais (notadamente temperatura e pH) e empregam plataformas em nuvem para transpor a distância física entre os viveiros e a tomada de decisão do produtor. Essas convergências demonstram um consenso acadêmico sobre a arquitetura básica de soluções IoT para a carcinicultura. Por outro lado, as soluções baseadas em conectividade Wi-Fi (\cite{Uddin2020} e \cite{Arifani2024}) compartilham a fragilidade de dependerem de infraestrutura de rede local, um gargalo relevante em áreas rurais isoladas, além da necessidade de calibração manual recorrente para manter a confiabilidade das leituras. Nenhum dos sistemas avaliados integra o controle automatizado da alimentação ao monitoramento ambiental, tratando essas duas funções intrinsecamente ligadas como responsabilidades separadas, e nenhum contempla o monitoramento de amônia, parâmetro crítico para a sobrevivência dos camarões. Em comparação, o sistema proposto neste trabalho inova ao unificar a coleta de dados e o controle ativo do cativeiro, com definição de horários e quantidades de ração, envio de alertas preventivos e monitoramento de amônia em um único ecossistema tecnológico.
 
 % Metodologia
-\section{Metodologia}
+\section{Materiais e Métodos}
 
 Esta pesquisa caracteriza-se como aplicada, uma vez que visa ao desenvolvimento de uma solução tecnológica concreta para o problema de manejo manual identificado na carcinicultura do Vale do Ribeira. Quanto à abordagem, classifica-se como quantitativa e experimental, pois os resultados são expressos em métricas mensuráveis de desempenho dos sensores, como erro médio e precisão percentual, obtidas por meio de testes com variação controlada das condições ambientais e comparação simultânea com instrumentos de referência calibrados. Em relação aos objetivos, a pesquisa tem caráter exploratório, dado que a aplicação de sistemas de monitoramento baseados em IoT voltados especificamente à realidade dos produtores de camarão de água doce do Vale do Ribeira ainda é pouco investigada, justificando a investigação da viabilidade técnica da solução proposta nesse contexto.
 
 O sistema foi desenvolvido seguindo uma abordagem iterativa, com ciclos de desenvolvimento, teste e refinamento realizados ao longo do projeto. O projeto foi estruturado em duas frentes: a aplicação web e o componente IoT. A aplicação web foi organizada em duas camadas: a interface de usuário, implementada como Aplicativo Web Progressivo (do inglês, \textit{Progressive Web App}, ou \textit{PWA}), garantindo acesso via dispositivos móveis sem necessidade de instalação nativa; e a camada de servidor, responsável pelo gerenciamento de dados, autenticação de usuários por meio de Tokens de Autenticação (do inglês, \textit{JSON Web Token}, ou \textit{JWT}) e comunicação com os equipamentos de monitoramento.
 
 A persistência dos dados é realizada em banco de dados não relacional hospedado em nuvem, que oferece armazenamento flexível e escalável. A interface de usuário e a Interface de Programação de Aplicações (do inglês, \textit{Application Programming Interface}, ou \textit{API}) foram disponibilizadas em plataformas de computação em nuvem com mecanismo de \textit{deploy} contínuo, assegurando a disponibilidade do sistema em ambiente de produção.
+
+\subsection{Ambiente de Testes}
+\label{sec:ambiente-testes}
+
+O componente IoT foi desenvolvido com base no microcontrolador ESP32, escolhido por oferecer conectividade Wi-Fi integrada, processamento suficiente para leitura simultânea de múltiplos sensores analógicos e digitais, e baixo custo em relação a alternativas com módulos de comunicação externos. O firmware foi implementado em linguagem C++ utilizando o núcleo \textit{core}) oficial da Espressif para a plataforma Arduino, garantindo compatibilidade com as  bibliotecas dos sensores utilizados. A validação do componente foi realizada em ambiente físico real, conforme detalhado na Seção~\ref{sec:validacao-sensores}. 
+As especificações técnicas do hardware constam na Tabela~\ref{tab:ambiente-testes}.
+
+\begin{table}[H]
+\centering
+\caption{Especificações do ambiente de testes}
+\label{tab:ambiente-testes}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Item} & \textbf{Especificação} \\
+\hline
+Microcontrolador & ESP32 [modelo/revisão] \\
+\hline
+Linguagem de firmware & C++ ([Arduino Core / PlatformIO, versão]) \\
+\hline
+Sensor de temperatura & DS18B20 \\
+\hline
+Sensor de pH & Ph4502 \\
+\hline
+Sensor de gases tóxicos & MQ-135 \\
+\hline
+Atuador & Módulo relé 5V + motor DC (dispensador) \\
+\hline
+\end{tabular}
+
+\vspace{2mm}
+{\small Fonte: Autoria Própria}
+\end{table}
 
 \subsection{Funcionamento do projeto}
 
@@ -200,6 +232,7 @@ O controle da alimentação é realizado diretamente pela plataforma, onde o usu
 O sistema contempla ainda diferentes níveis de acesso, com permissões distintas para cada perfil de usuário. O proprietário do cativeiro possui acesso completo às funcionalidades da plataforma, incluindo cadastro e gerenciamento de cativeiros, configuração de alertas e dietas, e visualização de relatórios. Funcionários cadastrados têm acesso restrito às informações operacionais, sem permissão para alterar configurações críticas do sistema. Essa estrutura de controle de acesso garante maior segurança operacional e permite que múltiplos colaboradores utilizem a plataforma sem comprometer a integridade das configurações definidas pelo proprietário.
 
 \subsection{Validação dos Sensores}
+\label{sec:validacao-sensores}
 
 A validação do componente IoT foi realizada em ambiente real, com camarões e peixes em um mesmo aquário, por meio de seis testes conduzidos em diferentes condições de temperatura e pH. As condições foram variadas de forma controlada ao longo dos testes, a fim de avaliar o comportamento dos sensores em cenários distintos de cultivo. Para cada teste, os valores de referência foram obtidos simultaneamente às leituras do ESP32, utilizando um termômetro de aquário, testes químicos de pH e amônia da marca OceanTech disponíveis no ambiente de teste, permitindo calcular o erro médio e a precisão de cada sensor. Os índices quantitativos obtidos a partir dessa metodologia de validação são detalhados e discutidos na seção subsequente.
 

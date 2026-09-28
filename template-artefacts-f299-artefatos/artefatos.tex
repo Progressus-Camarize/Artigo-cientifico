@@ -26,6 +26,7 @@
 
 \usepackage{enumitem}
 \usepackage{tikz}
+\usepackage[most]{tcolorbox}
 
 
 % Definição das cores
@@ -146,33 +147,37 @@
 % ===== CANVAS =====
 \section{CANVAS: Modelo de Negócio e Estratégia}
 
-O Business Model Canvas \cite{osterwalder2011} é uma ferramenta visual estratégica que permite descrever, analisar e projetar modelos de negócio de forma clara e objetiva. O canvas é dividido em nove blocos fundamentais que cobrem as principais áreas de um negócio.
+O Business Model Canvas é uma ferramenta visual estratégica que permite descrever, analisar e projetar modelos de negócio de forma clara e objetiva. O canvas é dividido em nove blocos fundamentais que cobrem as principais áreas de um negócio.
 
 \begin{table}[H]
 \centering
-\caption{Business Model Canvas -- Visão Geral}
+\caption{Business Model Canvas - Visão Geral}
 \label{tab:canvas}
 \small
 \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{2.8cm}|p{2.5cm}|p{2.8cm}|}
 \hline
 \textbf{Parcerias Principais} & \textbf{Atividades Chave} & \textbf{Proposta de Valor} & \textbf{Relacionamento} & \textbf{Segmentos} \\
 \hline
-Consultores da carcinicultura, produtores de camarão & Interpretação de dados sobre temperatura, pH e amônia, monitoramento comunicando com a plataforma & Automatização no cuidado dos cativeiros, redução de custos, aplicação juntamente com sistema IoT & Suporte técnico, treinamentos, chat direto com a empresa & Carcinicultura, aquicultura, sistema de monitoramento \\
+Fornecedores de sensores e microcontroladores (ESP32), provedores de infraestrutura em nuvem (Vercel, Render), consultores técnicos em carcinicultura & Coleta e interpretação de dados de temperatura, pH e amônia; geração de alertas em tempo real; manutenção da plataforma e dos sensores & Redução do tempo de manejo manual (de cerca de 5h/dia para monitoramento automatizado), alertas imediatos, maior precisão no controle da qualidade da água & Suporte técnico contínuo, treinamentos de uso, canal direto via chat/WhatsApp com a empresa & Pequenos e médios produtores de camarão e cooperativas de carcinicultura \\
 \hline
  & \textbf{Recursos Principais} & & \textbf{Canais} & \\
 \hline
- & Sensores de temperatura, pH e amônia, microcontrolador ESP32, dispensador automatizado de ração & & Comunicação via redes sociais, e-mail e telefone & \\
+ & Sensores (DS18B20, Ph4502, MQ-135), microcontrolador ESP32, plataforma web/PWA (React/Next.js, Node/Express, MongoDB Atlas), dispensador automatizado de ração & & Indicação por consultores e associações do setor, feiras e eventos de aquicultura, redes sociais e e-mail para captação, telefone/chat para suporte pós-venda & \\
 \hline
 \multicolumn{2}{|p{5.5cm}|}{\textbf{Estrutura de Custos}} & \multicolumn{3}{p{7.5cm}|}{\textbf{Fontes de Receita}} \\
 \hline
-\multicolumn{2}{|p{5.5cm}|}{Desenvolvimento do sistema, equipamentos IoT, marketing} & \multicolumn{3}{p{7.5cm}|}{Plano de assinatura mensal e anual, treinamentos, instalação do sistema} \\
+\multicolumn{2}{|p{5.5cm}|}{\textbf{Fixos:} desenvolvimento e manutenção do sistema, hospedagem em nuvem (Vercel/Render). \textbf{Variáveis:} equipamentos IoT por instalação, marketing e aquisição de clientes} & \multicolumn{3}{p{7.5cm}|}{Assinatura mensal ou anual (SaaS), taxa de instalação do sistema físico, treinamentos avulsos} \\
 \hline
 \end{tabular}
 \end{table}
 
 \subsection{Análise do Modelo de Negócio}
 
-A análise do Canvas revela que a proposta de valor do projeto está diretamente alinhada ao segmento de mercado identificado: a automatização do cuidado dos cativeiros e a redução de custos operacionais atendem às necessidades dos produtores de camarão que atualmente dedicam em média cinco horas diárias ao manejo manual. As atividades-chave de interpretação de dados e monitoramento em tempo real são viabilizadas pelos recursos principais, notadamente o microcontrolador ESP32 e os sensores integrados, que constituem a base tecnológica do sistema. O modelo de receita baseado em assinaturas mensais e anuais garante previsibilidade financeira e permite a manutenção contínua do sistema, enquanto as parcerias com consultores da carcinicultura e produtores locais asseguram a validação técnica e a aderência da solução à realidade do setor. Os canais de comunicação via redes sociais, e-mail e telefone possibilitam tanto a aquisição de novos clientes quanto o suporte técnico aos produtores já cadastrados.
+A proposta de valor se apoia em resultados mensuráveis do próprio protótipo, como tempo de resposta a alertas imediata e precisão validada dos sensores, o que reduz o risco de a proposta soar genérica frente à concorrência. Ainda assim, o modelo depende de uma premissa não testada: que produtores tradicionalmente pouco digitalizados aceitem pagar recorrentemente (assinatura) por um serviço cuja alternativa (manejo manual) tem custo percebido como zero, já que é mão de obra própria. Essa é a principal tensão do Canvas e deveria ser endereçada com mais clareza, por exemplo, comparando o custo da mão de obra desviada para outras tarefas com o valor da assinatura.
+
+A separação entre parcerias e segmentos evita um erro comum: tratar o próprio cliente (produtor de camarão) como parceiro estratégico. Os parceiros reais são quem viabiliza a operação sem ser quem paga: fornecedores de hardware e provedores de nuvem, dos quais o negócio depende diretamente para funcionar, e consultores técnicos, que também aparecem como canal de aquisição por indicação, conectando os blocos de parceria e canal de forma coerente.
+
+A estrutura de custos evidencia um ponto de atenção para a sustentabilidade do modelo de assinatura: os custos variáveis por instalação (sensores, microcontrolador) são custos únicos, mas o modelo de receita é recorrente, ou seja, a margem depende de reter o cliente por tempo suficiente para diluir o custo do hardware inicial, o que reforça a importância do bloco de relacionamento (suporte e treinamento) como mecanismo de retenção, não apenas de satisfação.
 
 % ===== SWOT =====
 \section{SWOT: Análise Estratégica}
@@ -191,20 +196,19 @@ A Análise SWOT (Strengths, Weaknesses, Opportunities, Threats) ou FOFA (Forças
 \hline
 \begin{minipage}[t]{7cm}
 \begin{itemize}
-    \item Integração entre aplicação e sensores IoT em tempo real
-    \item Automação de alimentação
-    \item Sistema de alertas multicanal
-    \item Interface intuitiva e responsiva
-    \item Redução de custos operacionais
+    \item Tempo de resposta imediato a alertas validado em campo
+    \item Arquitetura de baixo custo (ESP32 + sensores comerciais) frente a soluções industriais de monitoramento aquícola, mais caras
+    \item Armazenamento local (NVS) no ESP32, permitindo operação temporária sem conexão contínua
+    \item Precisão de leitura validada nos sensores de temperatura, pH e amônia
 \end{itemize}
 \end{minipage}
 &
 \begin{minipage}[t]{7cm}
 \begin{itemize}
-    \item Dependência de internet
-    \item Necessidade de manutenção dos sensores
-    \item Necessidade de treinamento dos usuários
-    \item Custo inicial de implementação
+    \item Risco de falhas técnicas no hardware (sensores, dispensador) e na integração com a plataforma
+    \item Nenhuma validação ainda com cliente pagante real, testado apenas em ambiente controlado/piloto acadêmico
+    \item Dependência de componentes importados (ESP32, sensores), sujeitos a variação cambial e prazo de importação
+    \item Curva de aprendizado para produtores pouco familiarizados com tecnologia digital
 \end{itemize}
 \end{minipage}
 \\
@@ -215,19 +219,19 @@ A Análise SWOT (Strengths, Weaknesses, Opportunities, Threats) ou FOFA (Forças
 \hline
 \begin{minipage}[t]{7cm}
 \begin{itemize}
-    \item Crescimento do mercado de aquicultura
-    \item Parcerias com instituições de pesquisa
-    \item Expansão para outros tipos de monitoramento ambiental
-    \item Aumento da demanda por soluções sustentáveis
+    \item Crescimento do mercado de aquicultura e da demanda por rastreabilidade/sustentabilidade na produção
+    \item Parcerias com instituições de pesquisa (ex: universidades) para validação científica e captação de fomento
+    \item Expansão do sistema para outros tipos de monitoramento ambiental agrícola
+    \item Linhas de crédito e programas de incentivo à automação rural
 \end{itemize}
 \end{minipage}
 &
 \begin{minipage}[t]{7cm}
 \begin{itemize}
-    \item Concorrência de soluções similares
-    \item Resistência à adoção de novas tecnologias
     \item Cobertura \textit{Wi-Fi} limitada em propriedades rurais do Vale do Ribeira, exigindo soluções de conectividade alternativas
-    \item Risco de falhas técnicas
+    \item Surtos de doenças no cultivo (ex: mancha branca), que afetam a demanda por qualquer tecnologia de manejo, independente de sua eficácia
+    \item Volatilidade do preço do camarão no mercado, reduzindo a margem do produtor para investir em novas tecnologias
+    \item Entrada de concorrentes com soluções similares e maior capital para escala comercial
 \end{itemize}
 \end{minipage}
 \\
@@ -239,10 +243,10 @@ A Análise SWOT (Strengths, Weaknesses, Opportunities, Threats) ou FOFA (Forças
 
 Com base na análise SWOT, as principais estratégias devem focar em:
 \begin{itemize}
-    \item \textbf{Forças + Oportunidades:} Utilizar a integração IoT e o sistema de alertas multicanal como diferencial competitivo para captar produtores no crescente mercado de aquicultura, firmando parcerias com instituições de pesquisa como a UNESP para validação científica
-    \item \textbf{Forças + Ameaças:} Explorar o armazenamento local (NVS) do ESP32 e a arquitetura resiliente para mitigar a cobertura \textit{Wi-Fi} limitada no Vale do Ribeira, investigando futuramente conectividade LoRa/4G
-    \item \textbf{Fraquezas + Oportunidades:} Desenvolver programa de treinamento simplificado para produtores, aproveitando a interface intuitiva e a persona do usuário-alvo como base para redução da curva de aprendizado
-    \item \textbf{Fraquezas + Ameaças:} Implementar plano de manutenção preventiva dos sensores e redesenho mecânico do dispensador para reduzir o risco de falhas técnicas e o custo operacional contínuo
+    \item \textbf{Forças + Oportunidades:} Utilizar os resultados validados (tempo de resposta, precisão dos sensores) como diferencial competitivo em parcerias com instituições de pesquisa, fortalecendo a credibilidade técnica do produto frente a linhas de fomento e programas de incentivo à automação rural
+    \item \textbf{Forças + Ameaças:} Explorar o armazenamento local (NVS) do ESP32 e a arquitetura de baixo custo para mitigar a cobertura \textit{Wi-Fi} limitada no Vale do Ribeira e reduzir a barreira de investimento em regiões com produtores de menor capital, investigando futuramente conectividade LoRa/4G
+    \item \textbf{Fraquezas + Oportunidades:} Buscar validação com cliente real via parceria com instituição de pesquisa ou programa de incentivo, transformando o piloto acadêmico em piloto comercial monitorado, o que também endereça a falta de dados de mercado
+    \item \textbf{Fraquezas + Ameaças:} Implementar plano de manutenção preventiva dos sensores e redundância na integração de hardware para reduzir o risco de falhas técnicas, especialmente relevante diante da entrada de concorrentes com maior capital, falhas recorrentes seriam o motivo mais fácil de perder espaço de mercado
 \end{itemize}
 
 % ===== UX/UI =====
