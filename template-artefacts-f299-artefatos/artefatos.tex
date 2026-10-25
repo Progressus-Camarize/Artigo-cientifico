@@ -154,7 +154,7 @@ O Business Model Canvas é uma ferramenta visual estratégica que permite descre
 \caption{Business Model Canvas - Visão Geral}
 \label{tab:canvas}
 \small
-\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{2.8cm}|p{2.5cm}|p{2.8cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{2.9cm}|>{\raggedright\arraybackslash}p{2.5cm}|}
 \hline
 \textbf{Parcerias Principais} & \textbf{Atividades Chave} & \textbf{Proposta de Valor} & \textbf{Relacionamento} & \textbf{Segmentos} \\
 \hline
@@ -164,9 +164,9 @@ Fornecedores de sensores e microcontroladores (ESP32), provedores de infraestrut
 \hline
  & Sensores (DS18B20, Ph4502, MQ-135), microcontrolador ESP32, plataforma web/PWA (React/Next.js, Node/Express, MongoDB Atlas), dispensador automatizado de ração & & Indicação por consultores e associações do setor, feiras e eventos de aquicultura, redes sociais e e-mail para captação, telefone/chat para suporte pós-venda & \\
 \hline
-\multicolumn{2}{|p{5.5cm}|}{\textbf{Estrutura de Custos}} & \multicolumn{3}{p{7.5cm}|}{\textbf{Fontes de Receita}} \\
+\multicolumn{2}{|>{\raggedright\arraybackslash}p{5.4cm}|}{\textbf{Estrutura de Custos}} & \multicolumn{3}{>{\raggedright\arraybackslash}p{8.5cm}|}{\textbf{Fontes de Receita}} \\
 \hline
-\multicolumn{2}{|p{5.5cm}|}{\textbf{Fixos:} desenvolvimento e manutenção do sistema, hospedagem em nuvem (Vercel/Render). \textbf{Variáveis:} equipamentos IoT por instalação, marketing e aquisição de clientes} & \multicolumn{3}{p{7.5cm}|}{Assinatura mensal ou anual (SaaS), taxa de instalação do sistema físico, treinamentos avulsos} \\
+\multicolumn{2}{|>{\raggedright\arraybackslash}p{5.4cm}|}{\textbf{Fixos:} desenvolvimento e manutenção do sistema, hospedagem em nuvem (Vercel/Render). \textbf{Variáveis:} equipamentos IoT por instalação, marketing e aquisição de clientes} & \multicolumn{3}{>{\raggedright\arraybackslash}p{8.5cm}|}{Assinatura mensal ou anual (SaaS), taxa de instalação do sistema físico, treinamentos avulsos} \\
 \hline
 \end{tabular}
 \end{table}
@@ -182,7 +182,7 @@ A estrutura de custos evidencia um ponto de atenção para a sustentabilidade do
 % ===== SWOT =====
 \section{SWOT: Análise Estratégica}
 
-A Análise SWOT (Strengths, Weaknesses, Opportunities, Threats) ou FOFA (Forças, Oportunidades, Fraquezas e Ameaças) \cite{chiavenato2020} é uma ferramenta fundamental para planejamento estratégico que permite identificar fatores internos e externos que impactam o projeto. Analisa forças, fraquezas, oportunidades e ameaças do projeto.
+A Análise SWOT (\textit{Strengths, Weaknesses, Opportunities, Threats}), ou FOFA (Forças, Oportunidades, Fraquezas e Ameaças) \cite{chiavenato2020}, é uma ferramenta de planejamento estratégico que identifica os fatores internos (forças e fraquezas) e externos (oportunidades e ameaças) que impactam o projeto.
 
 \begin{table}[H]
 \centering
@@ -196,19 +196,21 @@ A Análise SWOT (Strengths, Weaknesses, Opportunities, Threats) ou FOFA (Forças
 \hline
 \begin{minipage}[t]{7cm}
 \begin{itemize}
-    \item Tempo de resposta imediato a alertas validado em campo
-    \item Arquitetura de baixo custo (ESP32 + sensores comerciais) frente a soluções industriais de monitoramento aquícola, mais caras
-    \item Armazenamento local (NVS) no ESP32, permitindo operação temporária sem conexão contínua
-    \item Precisão de leitura validada nos sensores de temperatura, pH e amônia
+    \item Sistema integrado que reúne monitoramento da água, alertas e programação remota da alimentação em uma única plataforma
+    \item Alertas gerados a cada leitura recebida (leituras a cada minuto), por notificação \textit{push} e e-mail
+    \item Aplicação web progressiva, acessível por celular e computador sem lojas de aplicativos, com perfis de acesso (proprietário e funcionários)
+    \item Arquitetura baseada em componentes comerciais acessíveis (ESP32 e sensores de uso geral)
+    \item Desenvolvimento orientado por relatos de produtores sobre perdas por falha de alimentação e por alteração dos parâmetros da água
 \end{itemize}
 \end{minipage}
 &
 \begin{minipage}[t]{7cm}
 \begin{itemize}
-    \item Risco de falhas técnicas no hardware (sensores, dispensador) e na integração com a plataforma
-    \item Nenhuma validação ainda com cliente pagante real, testado apenas em ambiente controlado/piloto acadêmico
+    \item Monitoramento de amônia não validado: o sensor utilizado detecta gás no ar, e não amônia dissolvida
+    \item Dependência de Wi-Fi e da API: o firmware não armazena leituras durante quedas de conexão
+    \item Validação restrita a um aquário, uma espécie e cerca de 5,5 horas, sem validação com produtor ou cliente pagante
+    \item Desvio sistemático no pH, com ajuste em ponto único e referência de baixo custo
     \item Dependência de componentes importados (ESP32, sensores), sujeitos a variação cambial e prazo de importação
-    \item Curva de aprendizado para produtores pouco familiarizados com tecnologia digital
 \end{itemize}
 \end{minipage}
 \\
@@ -244,17 +246,10 @@ A Análise SWOT (Strengths, Weaknesses, Opportunities, Threats) ou FOFA (Forças
 Com base na análise SWOT, as principais estratégias devem focar em:
 \begin{itemize}
     \item \textbf{Forças + Oportunidades:} Utilizar os resultados validados (tempo de resposta, precisão dos sensores) como diferencial competitivo em parcerias com instituições de pesquisa, fortalecendo a credibilidade técnica do produto frente a linhas de fomento e programas de incentivo à automação rural
-    \item \textbf{Forças + Ameaças:} Explorar o armazenamento local (NVS) do ESP32 e a arquitetura de baixo custo para mitigar a cobertura \textit{Wi-Fi} limitada no Vale do Ribeira e reduzir a barreira de investimento em regiões com produtores de menor capital, investigando futuramente conectividade LoRa/4G
+    \item \textbf{Forças + Ameaças:} Aproveitar a arquitetura de componentes acessíveis e a aplicação web sem lojas de aplicativos para reduzir a barreira de entrada de produtores de menor capital e, para mitigar a limitação de conectividade, priorizar o armazenamento local de leituras no ESP32 e investigar conectividade LoRa/4G
     \item \textbf{Fraquezas + Oportunidades:} Buscar validação com cliente real via parceria com instituição de pesquisa ou programa de incentivo, transformando o piloto acadêmico em piloto comercial monitorado, o que também endereça a falta de dados de mercado
     \item \textbf{Fraquezas + Ameaças:} Implementar plano de manutenção preventiva dos sensores e redundância na integração de hardware para reduzir o risco de falhas técnicas, especialmente relevante diante da entrada de concorrentes com maior capital, falhas recorrentes seriam o motivo mais fácil de perder espaço de mercado
 \end{itemize}
-
-% ===== UX/UI =====
-\section{UX/UI: Design de Interface e Experiência do Usuário}
-
-UX (User Experience) e UI (User Interface) \cite{rogers2013} são disciplinas complementares focadas em criar produtos digitais que sejam funcionais, acessíveis e agradáveis de usar.\footnote{Ferramentas populares para design UX/UI incluem Figma, Adobe XD, Sketch e InVision.} O UX concentra-se na experiência geral do usuário, enquanto o UI cuida dos elementos visuais e interativos.
-
-\subsection{Guia de Estilos}
 
 \begin{table}[H]
 \centering
@@ -264,25 +259,18 @@ UX (User Experience) e UI (User Interface) \cite{rogers2013} são disciplinas co
 \hline
 \textbf{Elemento} & \textbf{Cor} & \textbf{Código HEX} & \textbf{Uso} \\
 \hline
-
-Primária & 
-\begin{tikzpicture}
-\shade[left color=primaryA, right color=primaryB]
-(0,0) rectangle (1.1,0.3);
-\end{tikzpicture}
-& \#aed5ff $\rightarrow$ \#ffc2c2 & Botões principais, destaques \\
-
-Secundária & \colorbox[HTML]{2261A6}{\phantom{AAA}} & \#2261A6 & Elementos secundários \\
-Fundo & \colorbox[HTML]{FFFFFF}{\phantom{AAA}} & \#FFFFFF & \textit{Background} padrão \\
-Fundo Informações & \colorbox[HTML]{F8fafc}{\phantom{AAA}} & \#F8fafc & \textit{Background} de informações \\
-Texto & \colorbox[HTML]{000000}{\color{white}\phantom{AAA}} & \#000000 & Texto principal \\
+Primária & \colorbox[HTML]{146AC7}{\phantom{AAA}} & \#146AC7 & Botões principais, links e destaques \\
+Secundária & \colorbox[HTML]{FFC2C2}{\phantom{AAA}} & \#FFC2C2 & Identidade visual e destaques \\
+Fundo & \fcolorbox[HTML]{BBBBBB}{FFFFFF}{\phantom{AAA}} & \#FFFFFF & \textit{Background} padrão \\
+Fundo Informações & \fcolorbox[HTML]{BBBBBB}{F8FAFC}{\phantom{AAA}} & \#F8FAFC & \textit{Background} de informações \\
+Texto & \colorbox[HTML]{000000}{\phantom{AAA}} & \#000000 & Texto principal \\
 Sucesso & \colorbox[HTML]{166534}{\phantom{AAA}} & \#166534 & Mensagens de sucesso \\
-Erro & \colorbox[HTML]{991b1b}{\color{white}\phantom{AAA}} & \#991b1b & Mensagens de erro \\
+Erro & \colorbox[HTML]{991B1B}{\phantom{AAA}} & \#991B1B & Mensagens de erro \\
 \hline
 \end{tabular}
 \end{table}
 
-\subsection{Tipografia}
+O azul primário apresenta contraste de cerca de 5,4:1 com o branco, e as cores de sucesso e de erro superam 7:1, acima do mínimo de 4,5:1 recomendado pela WCAG para texto.
 
 \begin{table}[H]
 \centering
@@ -292,9 +280,9 @@ Erro & \colorbox[HTML]{991b1b}{\color{white}\phantom{AAA}} & \#991b1b & Mensagen
 \hline
 \textbf{Elemento} & \textbf{Fonte} & \textbf{Tamanho} & \textbf{Uso} \\
 \hline
-Títulos & Montserrat & 28px & Cabeçalhos de seções e páginas \\
-Corpo & Roboto & 20px & Texto principal e descrições \\
-Botões & Poppins & 16px & Botões de ação e navegação \\
+Títulos & Poppins Bold & 19--28 px & Cabeçalhos de seções e páginas \\
+Corpo & Poppins Regular/Medium & 13--16 px & Texto principal e descrições \\
+Botões & Poppins Medium & 13--14 px & Botões de ação e navegação \\
 \hline
 \end{tabular}
 \end{table}
@@ -310,12 +298,13 @@ O mapa do site (\textit{sitemap}) mostra a hierarquia e organização das págin
 
 \begin{figure}[H]
 \centering
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[
     level 1/.style={sibling distance=4.5cm, level distance=1.5cm},
     level 2/.style={sibling distance=2.2cm, level distance=1.5cm},
     every node/.style={rectangle, draw, rounded corners, 
                        fill=secondarycolor!20, 
-                       text width=1.5cm, 
+                       text width=2.1cm, 
                        align=center,
                        font=\small}
 ]
@@ -336,7 +325,8 @@ O mapa do site (\textit{sitemap}) mostra a hierarquia e organização das págin
         child {node {Canais}}
         child {node {Formulário}}
     };
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \caption{Estrutura de navegação do website da equipe}
 \label{fig:sitemap}
 \end{figure}
@@ -359,7 +349,7 @@ O mapa do site (\textit{sitemap}) mostra a hierarquia e organização das págin
 \centering
 \caption{Stack Tecnológica do Website da Equipe}
 \label{tab:stack-web}
-\begin{tabular}{|l|l|p{6cm}|}
+\begin{tabular}{|l|l|>{\raggedright\arraybackslash}p{6cm}|}
 \hline
 \textbf{Camada} & \textbf{Tecnologia} & \textbf{Descrição} \\
 \hline
@@ -400,7 +390,7 @@ Apresenta a estrutura orientada a objetos do sistema, com Users como classe cent
     \centering
     \caption{Diagrama de Classes}
     \label{fig:diagrama-classes}
-        \includegraphics[width=1.1\textwidth]{imgs/diagrama_classes2.png}
+        \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{imgs/diagrama_classes2.png}}
     \\{\small Fonte: Autoria própria}
 \end{figure}
 \newpage
@@ -453,6 +443,21 @@ Organiza o sistema em três blocos principais: Frontend (Next.js/Vercel), Backen
     \\{\small Fonte: Autoria própria}
 \end{figure}
 
+\section{Infraestrutura de Rede}
+
+A Figura~\ref{fig:rede} apresenta a infraestrutura de rede do sistema. No cativeiro, cada ESP32 DevKit V1, ao qual estão conectados os sensores de temperatura (DS18B20), pH (PH-4502C) e gases (MQ-135) e o motor de passo do dispensador de ração (28BYJ-48 com driver ULN2003), conecta-se por \textit{Wi-Fi} (padrão 802.11 b/g/n, banda de 2,4 GHz) a um roteador local, que dá acesso à internet por meio do provedor. A cada minuto, o ESP32 envia as leituras à API, hospedada na Render, e, nos horários programados, consulta a ela a configuração de alimentação, ambas as comunicações por HTTPS (porta 443).
+
+A API grava os dados no MongoDB Atlas, banco de dados em nuvem, por conexão com TLS, e avalia cada leitura ao recebê-la. Quando um limite configurado é ultrapassado, ela aciona os alertas por e-mail (Nodemailer, via SMTP do Gmail) e por notificação \textit{push} (Web Push, protocolo VAPID). O frontend, desenvolvido em Next.js e disponibilizado como aplicação web progressiva, é hospedado na Vercel e acessado pelos usuários, em smartphone ou notebook, por HTTPS (porta 443), a partir de qualquer rede.
+
+Como consequência dessa arquitetura, o funcionamento do sistema no cativeiro depende de conectividade \textit{Wi-Fi} local e de acesso à internet: durante interrupções, as leituras não são enviadas e o ESP32 não consegue consultar a configuração de alimentação.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\linewidth]{imgs/diagrama_rede_camarize.png}
+\caption{Diagrama de infraestrutura de rede do sistema}
+\label{fig:rede}
+\end{figure}
+
 \subsection{Diagrama de Implantação}
 
 Apresenta a distribuição física dos componentes em produção, incluindo a aplicação PWA na Vercel, a API REST no Render, o banco MongoDB Atlas e o ESP32 no ambiente do cativeiro, com \textit{deploy} contínuo via GitHub.
@@ -491,7 +496,7 @@ O modelo conceitual representa as entidades e seus relacionamentos em alto níve
     \centering
     \caption{Modelo Conceitual do Banco de Dados}
     \label{fig:modelo-conceitual}
-        \includegraphics[width=1.1\textwidth]{imgs/modelo_conceitual.png}
+        \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{imgs/modelo_conceitual.png}}
     \\{\small Fonte: Autoria própria}
 \end{figure}
 
@@ -503,7 +508,7 @@ O modelo lógico refina o conceitual para um esquema de coleções MongoDB, deta
     \centering
     \caption{Modelo Lógico do Banco de Dados}
     \label{fig:modelo-logico}
-        \includegraphics[width=1.1\textwidth]{imgs/modelo_logico.jpeg}
+        \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{imgs/modelo_logico.jpeg}}
     \\{\small Fonte: Autoria própria}
 \end{figure}
 
@@ -515,76 +520,364 @@ O modelo físico é a implementação final utilizando \textit{Mongoose Schemas}
     \centering
     \caption{Modelo Físico do Banco de Dados}
     \label{fig:modelo-fisico}
-        \includegraphics[width=1.1\textwidth]{imgs/modelo_fisico.jpg}
+        \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{imgs/modelo_fisico.jpg}}
     \\{\small Fonte: Autoria própria}
 \end{figure}
 
 % ===== DEVOPS =====
 \section{DevOps: Infraestrutura, Automação e Entrega Contínua}
-DevOps \cite{kim2018} é uma cultura e conjunto de práticas que integra desenvolvimento de software (Dev) e operações de TI (Ops), focando em automação, colaboração e entrega contínua.\footnote{O termo "DevOps" foi popularizado por Patrick Debois em 2009.}
+DevOps \cite{kim2018} é uma cultura e conjunto de práticas que integra desenvolvimento de software (Dev) e operações de TI (Ops), focando em automação, colaboração e entrega contínua.
 
 \subsection{Pipeline CI/CD}
-O pipeline de integração contínua é executado automaticamente a cada push na branch \texttt{main}, garantindo a qualidade do código:
+O pipeline (GitHub Actions) é executado a cada \textit{push} e \textit{pull request} na branch \texttt{main} e reúne: lint (ESLint) e verificação de sintaxe da API; testes unitários da API com cobertura, executados contra um MongoDB em contêiner; \textit{build} de produção do frontend; verificação de segredos versionados; testes de ponta a ponta (Playwright); auditoria de dependências (\textit{npm audit}); e \textit{build} das imagens Docker. O job \texttt{ci-passed} consolida o resultado e, em \textit{push} na \texttt{main}, somente quando ele é bem-sucedido, os jobs de deploy publicam o frontend na Vercel (via CLI) e a API no Render (via API da plataforma, com verificação de prontidão). O auto-deploy nativo das duas plataformas foi desativado para que nada seja publicado sem passar pelo CI. Há ainda um fluxo de publicação manual, com confirmação explícita, para republicar um commit específico.
+
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
-    node distance=1.5cm,
-    every node/.style={rectangle, draw, rounded corners, 
-                       fill=secondarycolor!20, 
-                       text width=2cm, 
+    node distance=3.3cm,
+    every node/.style={rectangle, draw, rounded corners,
+                       fill=secondarycolor!20,
+                       text width=2.4cm,
                        align=center,
-                       font=\small,
-                       minimum height=1cm}
+                       font=\footnotesize,
+                       minimum height=1.4cm}
 ]
-\node (code) {Code};
-\node (build) [right of=code, xshift=1cm] {Build};
-\node (test) [right of=build, xshift=1cm] {Test};
-\node (deploy) [right of=test, xshift=1cm] {Deploy};
-\draw[->, thick] (code) -- (build);
-\draw[->, thick] (build) -- (test);
-\draw[->, thick] (test) -- (deploy);
-\draw[->, thick, dashed] (deploy) to[bend right=45] (code);
+\node (push) {\textit{Push} ou \textit{pull request}\\na \texttt{main}};
+\node (ci) [right of=push] {CI: lint, testes, \textit{build}, E2E, segredos, auditoria e Docker};
+\node (gate) [right of=ci] {\texttt{ci-passed}\\(portão de qualidade)};
+\node (deploy) [right of=gate] {Deploy\\Vercel e Render};
+\node (manual) [below of=deploy, node distance=2cm, dashed] {Publicação manual\\(confirmação)};
+\draw[->, thick] (push) -- (ci);
+\draw[->, thick] (ci) -- (gate);
+\draw[->, thick] (gate) -- (deploy);
+\draw[->, thick, dashed] (manual) -- (deploy);
 \end{tikzpicture}
 \caption{Pipeline CI/CD}
 \label{fig:cicd}
 \end{figure}
 
 \subsection{Configuração CI/CD}
-O pipeline é composto por dois jobs paralelos: build do frontend (Next.js) e verificação de sintaxe da API (Node.js). Além disso, a Vercel realiza deploy automático do frontend a cada push:
+O deploy depende do resultado do job \texttt{ci-passed}, que só reprova quando falham o lint, os testes da API, o \textit{build} do frontend, a verificação de segredos ou os testes de ponta a ponta; a auditoria de dependências e o \textit{build} das imagens Docker são informativos. O trecho a seguir (de \texttt{.github/workflows/ci.yml}) mostra a condição de publicação:
+
 \begin{verbatim}
 name: CI
+
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  lint-api:
+    name: Lint API
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: api/package-lock.json
+
+      - run: npm ci
+
+      - name: Verificação de sintaxe (node --check)
+        run: |
+          find . -name "*.js" -not -path "./node_modules/*" \
+            -not -path "./tests/*" -exec node --check {} \;
+
+      - name: ESLint
+        run: npm run lint
+
+  test-api:
+    name: Testes API
+    runs-on: ubuntu-latest
+    needs: lint-api
+    services:
+      mongo:
+        image: mongo:7.0
+        ports: ['27017:27017']
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand({ping:1})'"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      MONGO_TEST_URL: mongodb://127.0.0.1:27017
+    defaults:
+      run:
+        working-directory: api
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: api/package-lock.json
+
+      - run: npm ci
+
+      - name: Rodar testes unitários com cobertura
+        run: npm run test:coverage
+
+      - name: Upload relatório de cobertura
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: api-coverage-report
+          path: api/coverage/
+          retention-days: 14
+
   build-frontend:
-    name: Frontend build
+    name: Build Frontend
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: front-react
+    env:
+
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+      NEXT_PUBLIC_SSE_URL: http://localhost:4000
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
         with:
-          node-version: 18
+          node-version: 20
           cache: npm
           cache-dependency-path: front-react/package-lock.json
+
       - run: npm ci
-      - run: npm run build
-  check-api:
-    name: API syntax check
+
+      - name: Build de produção (Next.js)
+        run: npm run build
+
+  check-secrets:
+    name: Verificação de Segredos
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
         with:
-          node-version: 18
-      - run: find api -name "*.js" -not -path "*/node_modules/*"
-             -exec node --check {} \;
+          node-version: 20
+
+      - name: Rodar scanner de segredos e dumps versionados
+        run: node scripts/ci/check-secrets.mjs
+
+  e2e:
+    name: Testes E2E (Playwright)
+    runs-on: ubuntu-latest
+    needs: [lint-api, build-frontend]
+    services:
+      mongo:
+        image: mongo:7.0
+        ports: ['27017:27017']
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand({ping:1})'"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      MONGO_TEST_URL: mongodb://127.0.0.1:27017
+      NEXT_PUBLIC_API_URL: http://127.0.0.1:4100
+      NEXT_PUBLIC_SSE_URL: http://127.0.0.1:4100
+      NEXT_TELEMETRY_DISABLED: '1'
+      REQUIRE_PUBLIC_ENV: 'true'
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            api/package-lock.json
+            front-react/package-lock.json
+
+      - run: npm ci
+      - run: npm ci --prefix api
+      - run: npm ci --prefix front-react
+
+      - name: Build de produção (Next.js) com URLs de teste
+        run: npm run build --prefix front-react
+
+      - run: npx --no-install playwright install --with-deps chromium
+
+      - name: Rodar testes E2E
+        run: npm run test:e2e
+
+      - name: Upload relatório de testes do navegador
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: browser-test-results
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
+
+  audit:
+    name: Auditoria de Dependências
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        directory: [api, front-react]
+    defaults:
+      run:
+        working-directory: ${{ matrix.directory }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: ${{ matrix.directory }}/package-lock.json
+
+      - run: npm ci
+
+      - name: Auditoria npm (${{ matrix.directory }})
+        run: npm audit --omit=dev --audit-level=critical
+        continue-on-error: true
+
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: [test-api, build-frontend]
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build imagem API
+        run: docker build -t camarize-api:ci ./api
+
+      - name: Build imagem Frontend
+        run: |
+          docker build \
+            --build-arg NEXT_PUBLIC_API_URL=http://localhost:4000 \
+            --build-arg NEXT_PUBLIC_SSE_URL=http://localhost:4000 \
+            -t camarize-frontend:ci ./front-react
+
+  ci-passed:
+    name: CI Passou
+    runs-on: ubuntu-latest
+    if: always()
+    needs:
+      - lint-api
+      - test-api
+      - build-frontend
+      - check-secrets
+      - e2e
+      - audit
+      - docker-build
+    steps:
+      - name: Verificar resultados
+        run: |
+          echo "Lint API:            ${{ needs.lint-api.result }}"
+          echo "Test API:            ${{ needs.test-api.result }}"
+          echo "Build Frontend:      ${{ needs.build-frontend.result }}"
+          echo "Verificação Segredos: ${{ needs.check-secrets.result }}"
+          echo "E2E:                 ${{ needs.e2e.result }}"
+          echo "Audit:               ${{ needs.audit.result }}"
+          echo "Docker Build:        ${{ needs.docker-build.result }}"
+
+          if [[ "${{ needs.lint-api.result }}" == "failure" ]] || \
+             [[ "${{ needs.test-api.result }}" == "failure" ]] || \
+             [[ "${{ needs.build-frontend.result }}" == "failure" ]] || \
+             [[ "${{ needs.check-secrets.result }}" == "failure" ]] || \
+             [[ "${{ needs.e2e.result }}" == "failure" ]]; then
+            echo "CI falhou em jobs obrigatórios!"
+            exit 1
+          fi
+
+          echo "Todos os jobs obrigatórios passaram!"
+
+  deploy-frontend:
+    name: Deploy Frontend (Vercel)
+    runs-on: ubuntu-latest
+    needs: ci-passed
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      needs.ci-passed.result == 'success'
+    environment: production
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+
+      - name: Conferir configuração da Vercel
+        run: |
+          test -n "$VERCEL_TOKEN" || \
+            { echo "Configure o secret VERCEL_TOKEN."; exit 1; }
+          test -n "$VERCEL_ORG_ID" || \
+            { echo "Configure a variável VERCEL_ORG_ID."; exit 1; }
+          test -n "$VERCEL_PROJECT_ID" || \
+            { echo "Configure a variável VERCEL_PROJECT_ID."; exit 1; }
+
+      - name: Pull do ambiente de produção da Vercel
+        working-directory: front-react
+        run: |
+          npx --yes vercel@64.5.0 pull --yes \
+            --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build de produção (via Vercel)
+        working-directory: front-react
+        run: npx --yes vercel@64.5.0 build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy para produção
+        working-directory: front-react
+        run: |
+          npx --yes vercel@64.5.0 deploy \
+            --prebuilt --prod --token="$VERCEL_TOKEN"
+
+  deploy-api:
+    name: Deploy API (Render)
+    runs-on: ubuntu-latest
+    needs: ci-passed
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      needs.ci-passed.result == 'success'
+    environment: production
+    env:
+      RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      RENDER_SERVICE_ID: ${{ vars.RENDER_SERVICE_ID }}
+      API_URL: ${{ vars.API_URL }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+
+      - name: Conferir configuração do Render
+        run: |
+          test -n "$RENDER_API_KEY" || \
+            { echo "Configure o secret RENDER_API_KEY."; exit 1; }
+          test -n "$RENDER_SERVICE_ID" || \
+            { echo "Configure a variável RENDER_SERVICE_ID."; exit 1; }
+          test -n "$API_URL" || \
+            { echo "Configure a variável API_URL."; exit 1; }
+
+      - name: Publicar no Render e aguardar readiness
+        run: node scripts/ci/deploy-render.mjs
 \end{verbatim}
 
-\subsection{Infraestrutura como Código}
+\subsection{Ferramentas e Infraestrutura como Código}
 \begin{table}[H]
 \centering
 \caption{Ferramentas DevOps Utilizadas}
@@ -594,13 +887,14 @@ jobs:
 \textbf{Categoria} & \textbf{Ferramenta} & \textbf{Finalidade} \\
 \hline
 Controle de Versão & Git + GitHub & Versionamento de código e colaboração \\
-CI/CD & GitHub Actions & Automação de build e verificação de sintaxe \\
-Hosting Frontend & Vercel & Hospedagem e deploy automático do Next.js \\
-Hosting Backend & Render & Hospedagem da API Express em produção \\
-Containerização & Docker + Compose & Empacotamento e orquestração local de serviços \\
+CI/CD & GitHub Actions & Lint, testes, \textit{build}, verificação de segredos, auditoria e deploy \\
+Testes & Vitest + Playwright & Testes unitários da API e testes de ponta a ponta \\
+Dependências & Dependabot & Atualizações semanais de dependências \\
+Hosting Frontend & Vercel & Hospedagem do Next.js (deploy pelo GitHub Actions) \\
+Hosting Backend & Render & Hospedagem da API Express em produção (deploy pelo GitHub Actions) \\
+Containerização & Docker + Compose & Desenvolvimento local e validação das imagens no CI \\
 Banco de Dados & MongoDB Atlas & Banco de dados NoSQL em nuvem (cluster gerenciado) \\
 Documentação API & Swagger UI & Documentação interativa de endpoints REST \\
-Tunelamento & Ngrok & Exposição de serviços locais para testes externos \\
 \hline
 \end{tabular}
 \end{table}
@@ -617,26 +911,25 @@ Esta seção documenta como o sistema funciona em diferentes ambientes e platafo
 \hline
 \textbf{Componente} & \textbf{Descrição} \\
 \hline
-\textbf{Rede Local (LAN)} & 
+\textbf{Rede Local (LAN)} &
 \begin{itemize}[leftmargin=*, nosep]
     \item Ambiente local para desenvolvimento e testes da aplicação
-    \item Docker Compose para integração entre API (porta 4000) e Frontend (porta 3000)
+    \item Docker Compose (\texttt{tools/docker-compose.yml}) para a API (porta 4000) e o frontend (porta 3000)
     \item Comunicação entre serviços via \texttt{localhost} com portas dedicadas
-    \item Controle de versão integrado ao Git e GitHub
-    \item Testes de sintaxe e build executados via CI antes do merge
+    \item Controle de versão integrado ao Git e ao GitHub
+    \item Lint, testes, \textit{build} e verificação de segredos executados pelo CI em cada \textit{pull request}
 \end{itemize} \\
 \hline
-\textbf{Cloud (Nuvem)} & 
+\textbf{Cloud (Nuvem)} &
 \begin{itemize}[leftmargin=*, nosep]
-    \item Frontend hospedado na Vercel com deploy automático via integração GitHub
-    \item Backend hospedado no Render como serviço web
+    \item Frontend hospedado na Vercel e API hospedada no Render como serviço web
+    \item Deploy feito por jobs do GitHub Actions, somente em \textit{push} na \texttt{main} e após aprovação do CI
+    \item Verificação de prontidão da API após cada deploy e \textit{health check} em \texttt{/api/health}
     \item Banco de dados MongoDB Atlas em nuvem (cluster gerenciado)
-    \item Deploy automático do frontend a cada push na branch \texttt{main}
-    \item Replicação e backup automático fornecidos pelo MongoDB Atlas
-    \item Variáveis de ambiente gerenciadas nas plataformas Vercel e Render
+    \item Variáveis de ambiente gerenciadas nas plataformas e segredos mantidos nos \textit{secrets} do GitHub
 \end{itemize} \\
 \hline
-\textbf{Dispositivos Móveis} & 
+\textbf{Dispositivos Móveis} &
 \begin{itemize}[leftmargin=*, nosep]
     \item Interface responsiva (PWA) adaptada para smartphones e tablets
     \item Service Worker para cache offline e notificações push
@@ -645,14 +938,15 @@ Esta seção documenta como o sistema funciona em diferentes ambientes e platafo
     \item Suporte para iOS e Android via navegador
 \end{itemize} \\
 \hline
-\textbf{Segurança} & 
+\textbf{Segurança} &
 \begin{itemize}[leftmargin=*, nosep]
     \item SSL/TLS fornecido automaticamente pela Vercel e pelo Render
     \item Autenticação via JSON Web Tokens (JWT) com validação de \texttt{tokenVersion}
-    \item Senhas criptografadas com bcrypt (migração transparente de senhas legadas)
+    \item Senhas criptografadas com bcrypt
+    \item Dispositivos IoT identificados por chave (\texttt{X-Device-Key}) nas requisições à API
     \item CORS configurado para origens permitidas
-    \item Controle de acesso por roles (\texttt{master}, \texttt{admin}, \texttt{membro})
-    \item Middleware de bloqueio de escrita para membros (\texttt{BlockMembersWrite})
+    \item Controle de acesso por \textit{roles} (\texttt{master}, \texttt{admin}, \texttt{membro})
+    \item Verificação automática de segredos versionados no CI
 \end{itemize} \\
 \hline
 \end{tabular}
@@ -669,26 +963,25 @@ Para ilustrar como os componentes se conectam:
 \label{fig:infrastructure-diagram}
 \end{figure}
 
-
 \begin{itemize}
     \item \textbf{Usuários Web/Mobile:} Acessam via navegador através de HTTPS (PWA responsiva)
-    \item \textbf{Frontend:} Next.js 14 hospedado na Vercel (deploy automático)
-    \item \textbf{Backend:} API Express 5 hospedada no Render (Node.js 18)
+    \item \textbf{Frontend:} Next.js 15 hospedado na Vercel
+    \item \textbf{Backend:} API Express 5 hospedada no Render (Node.js 24)
     \item \textbf{Banco de Dados:} MongoDB Atlas (cluster em nuvem)
-    \item \textbf{Monitoramento:} Serviço interno com verificação periódica de parâmetros dos cativeiros
-    \item \textbf{Notificações:} Nodemailer (Gmail SMTP) para alertas por e-mail + Web Push para notificações no navegador
+    \item \textbf{Monitoramento:} Serviço interno com verificação periódica dos parâmetros dos cativeiros
+    \item \textbf{Notificações:} Nodemailer (Gmail SMTP) para alertas por e-mail e Web Push para notificações no navegador
     \item \textbf{ESP32:} Sensores IoT enviando dados de temperatura, pH e amônia via API REST
 \end{itemize}
 
 \subsection{Arquitetura de Deploy}
-A arquitetura de deployment em produção utiliza serviços gerenciados na nuvem:
+A arquitetura de deployment em produção utiliza serviços gerenciados na nuvem, com a publicação feita pelo GitHub Actions:
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
     node distance=2cm,
-    component/.style={rectangle, draw, rounded corners, 
-                      fill=secondarycolor!20, 
-                      text width=3cm, 
+    component/.style={rectangle, draw, rounded corners,
+                      fill=secondarycolor!20,
+                      text width=3cm,
                       align=center,
                       minimum height=1.2cm}
 ]
@@ -696,36 +989,34 @@ A arquitetura de deployment em produção utiliza serviços gerenciados na nuvem
 \node[component, below left of=user, xshift=-2cm, yshift=-1cm] (vercel) {Vercel\\(Frontend)};
 \node[component, below right of=user, xshift=2cm, yshift=-1cm] (render) {Render\\(API Backend)};
 \node[component, below of=render, yshift=-1.5cm] (mongo) {MongoDB Atlas\\(Banco de Dados)};
-\node[component, below of=vercel, yshift=-1.5cm] (github) {GitHub\\(Repositório)};
+\node[component, below of=vercel, yshift=-1.5cm] (github) {GitHub Actions\\(CI e deploy)};
 \draw[->, thick] (user) -- (vercel);
 \draw[->, thick] (user) -- (render);
 \draw[<->, thick] (vercel) -- node[above, font=\scriptsize] {API calls} (render);
 \draw[<->, thick] (render) -- (mongo);
-\draw[->, thick, dashed] (github) -- node[left, font=\scriptsize] {deploy} (vercel);
-\draw[->, thick, dashed] (github) -- node[right, font=\scriptsize] {deploy} (render);
+\draw[->, thick, dashed] (github) -- node[left, font=\scriptsize] {deploy via CLI} (vercel);
+\draw[->, thick, dashed] (github) -- node[right, font=\scriptsize] {deploy via API} (render);
 \end{tikzpicture}
 \caption{Arquitetura de Deployment em Produção}
 \label{fig:deployment}
 \end{figure}
 
 \subsection{Configuração Docker Compose (Desenvolvimento)}
-Para o ambiente de desenvolvimento local, utiliza-se Docker Compose para orquestrar os serviços. Em produção, o sistema é hospedado diretamente nas plataformas Vercel (\textit{frontend}) e Render (API), sem utilização de containers:
+Para o ambiente de desenvolvimento local, o arquivo \texttt{tools/docker-compose.yml} orquestra a API e o frontend. Em produção, o frontend é publicado na Vercel e a API no Render, e o CI valida o \textit{build} das imagens Docker:
 \begin{verbatim}
 services:
   api:
     build: ../api
-    container_name: camarize-api
-    restart: unless-stopped
-    env_file: ../api/.env
+    env_file: ../api/.env.docker
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - PORT=4000
     ports:
       - "4000:4000"
   frontend:
-    build: ../front-react
-    container_name: camarize-frontend
-    restart: unless-stopped
+    build:
+      context: ../front-react
+      target: development
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:4000
       - NEXT_PUBLIC_SSE_URL=http://localhost:4000
@@ -733,12 +1024,12 @@ services:
       - api
     ports:
       - "3000:3000"
-\end{verbatim}
+\end{verbatim} 
 
 \subsection{Monitoramento e Alertas}
 O sistema possui um serviço de monitoramento automático que verifica periodicamente os parâmetros dos cativeiros:
 \begin{itemize}
-    \item \textbf{Intervalo de Verificação:} Configurável via variável de ambiente (\texttt{MONITORING\_INTERVAL\_MINUTES}, padrão: 5 minutos)
+    \item \textbf{Intervalo de Verificação:} Definido por variável de ambiente (\texttt{MONITORING\_\allowbreak INTERVAL\_\allowbreak MINUTES}, padrão: 5 minutos)
     \item \textbf{Parâmetros Monitorados:} Temperatura, pH e Amônia
     \item \textbf{Tolerâncias:} Temperatura (15\%), pH (20\%), Amônia (25\%)
     \item \textbf{Severidade:} Classificação automática em \texttt{media} ou \texttt{alta}
