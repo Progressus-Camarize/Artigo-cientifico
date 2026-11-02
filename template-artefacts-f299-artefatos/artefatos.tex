@@ -478,7 +478,7 @@ Modela o ciclo de vida de um cativeiro em quatro estados: AguardandoInstalação
     \centering
     \caption{Diagrama de Estados}
     \label{fig:diagrama-estados}
-        \includegraphics[width=0.8\textwidth]{imgs/diagrama_estados.png}
+        \includegraphics[width=0.8\textwidth]{imgs/diagrama_estados_2.png}
     \\{\small Fonte: Autoria própria}
 \end{figure}
 
@@ -1033,7 +1033,7 @@ O sistema possui um serviço de monitoramento automático que verifica periodica
     \item \textbf{Parâmetros Monitorados:} Temperatura, pH e Amônia
     \item \textbf{Tolerâncias:} Temperatura (15\%), pH (20\%), Amônia (25\%)
     \item \textbf{Severidade:} Classificação automática em \texttt{media} ou \texttt{alta}
-    \item \textbf{Canais de Alerta:} E-mail (Gmail SMTP via Nodemailer) com respeito a quiet hours e rate limiting
+    \item \textbf{Canais de Alerta:} E-mail (Gmail SMTP via Nodemailer) com respeito a quiet hours e rate limitingdia
     \item \textbf{Health Check:} Endpoint \texttt{/api/health} para verificação do status da API e banco de dados
 \end{itemize}
 
@@ -1054,13 +1054,15 @@ As métricas a seguir são \textbf{valores de referência} publicados pelas plat
 \newpage
 \section*{Conclusão}
 
-O conjunto de artefatos apresentado neste documento reflete o planejamento e a fundamentação técnica do projeto de monitoramento IoT para carcinicultura. A análise do Business Model Canvas, complementada pela interpretação estratégica dos nove blocos, evidenciou um modelo de negócio centrado na automação e na redução de custos operacionais para produtores de camarão. A análise SWOT identificou a dependência de conectividade e o custo inicial como principais desafios internos, contrabalançados pelo crescimento do mercado de aquicultura e pela demanda por soluções sustentáveis.
+O desenvolvimento do projeto Camarize possibilitou a elaboração de uma solução tecnológica voltada ao monitoramento de parâmetros relacionados à criação de camarões em cativeiro, integrando conceitos de Internet das Coisas (IoT), desenvolvimento de software e armazenamento de dados em nuvem. Ao longo do projeto, foram desenvolvidos artefatos de documentação e modelagem, incluindo análises de negócio, diagramas UML, modelagem do banco de dados, arquitetura de infraestrutura, prototipação de interfaces e processos de integração e entrega contínua.
 
-A seção de UX/UI foi estruturada com guia de estilos, tipografia, componentes visuais, persona do usuário-alvo e jornada de uso, fundamentando as decisões de \textit{design} na pesquisa de campo realizada com produtores do Vale do Ribeira.
+A implementação do protótipo permitiu integrar os componentes de hardware e software, estabelecendo a comunicação entre os sensores, a API e os serviços responsáveis pelo armazenamento e disponibilização das informações. Também foram desenvolvidos recursos de visualização e acompanhamento dos dados, além de mecanismos de notificação, conforme as funcionalidades previstas para o sistema.
 
-No âmbito técnico, os sete diagramas UML documentam a arquitetura completa do sistema, desde os casos de uso até a infraestrutura de implantação, fornecendo uma visão abrangente das interações entre os componentes. A modelagem do banco de dados não relacional (MongoDB) foi detalhada nos níveis conceitual, lógico e físico, refletindo a implementação real do sistema com \textit{Mongoose Schemas}. A infraestrutura DevOps implementada, com \textit{pipeline} CI/CD via GitHub Actions, containerização com Docker para desenvolvimento local e \textit{deploy} contínuo nas plataformas Vercel e Render, garante um fluxo de entrega automatizado e rastreável.
+Os testes realizados tiveram como finalidade verificar o funcionamento básico dos componentes e a integração entre as partes da solução, permitindo identificar limitações e oportunidades de melhoria. Entre os desafios encontrados, destacam-se as limitações dos sensores utilizados, a dependência de conectividade com a internet e a necessidade de aprimorar a validação das medições em condições reais de criação. Essas limitações devem ser consideradas na interpretação dos dados apresentados pelo sistema e em possíveis evoluções do projeto.
 
-O website institucional da equipe complementa a documentação ao padronizar a identidade visual e os canais de comunicação do projeto. Em conjunto, os artefatos formam uma base documental coerente que sustenta o desenvolvimento, a manutenção e a evolução futura do sistema.
+No âmbito do desenvolvimento e da manutenção do software, a utilização de ferramentas de versionamento, automação de testes, conteinerização e integração contínua contribuiu para organizar o processo de desenvolvimento e padronizar as verificações realizadas antes da disponibilização das aplicações. O pipeline de CI/CD foi configurado e executado com sucesso, demonstrando a viabilidade da automação adotada no projeto.
+
+Dessa forma, considera-se que os objetivos propostos para o desenvolvimento do protótipo foram alcançados, demonstrando a viabilidade da integração entre hardware, software e serviços em nuvem para apoiar o monitoramento da criação de camarões em cativeiro. Embora a solução ainda apresente limitações que podem ser trabalhadas em versões futuras, os resultados obtidos constituem uma base para evoluções, como o aprimoramento da precisão das medições, a ampliação dos testes em ambientes reais e a inclusão de novos recursos de acompanhamento e análise.
 
 \vspace{1cm}
 \noindent\rule{\textwidth}{0.5pt}
