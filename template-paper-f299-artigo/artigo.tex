@@ -21,6 +21,7 @@
 \usepackage{array}
 \usepackage{tikz}
 \usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
 \usepackage{lastpage}
 
 % Definição das cores
@@ -73,7 +74,8 @@
 \large \textit{Shrimp Farming in Captivity with IoT Monitoring for Gastronomy}}
 
 \author{
-    Davi Mathais de Almeida$^{1}$, Leandro Augusto de Souza Muniz$^{1}$, Tiago de Lara Rodrigues$^{1}$ \\[0.3cm]
+    Davi Mathais de Almeida$^{1}$, Leandro Augusto de Souza Muniz$^{1}$, \\
+    Tiago de Lara Rodrigues$^{1}$ \\[0.3cm]
     \small
     $^{1}$Faculdade de Tecnologia do Estado de São Paulo \\
     \textit{davi.almeida@aluno.cps.sp.gov.br, leandro.muniz@aluno.cps.sp.gov.br,} \\
@@ -119,7 +121,7 @@ O Vale do Ribeira, localizado no sul do estado de São Paulo, apresenta condiç�
 
 A qualidade da água é um dos fatores determinantes para a produção de camarões com valor gastronômico. Variações inadequadas de temperatura podem causar estresse fisiológico nos camarões, afetando o metabolismo, o consumo de oxigênio e o desempenho produtivo \cite{praciano2018}. O pH inadequado prejudica a osmorregulação e degrada aminoácidos responsáveis pelo sabor do camarão \cite{Hsieh2021}, além de favorecer a proliferação de bactérias do gênero \textit{Vibrio}, que representam risco à saúde do consumidor \cite{han2025}. A amônia, produzida pelo metabolismo proteico e pela decomposição de matéria orgânica, provoca danos ao tecido muscular e ao hepatopâncreas em concentrações elevadas \cite{han2025}. Sistemas de rastreabilidade na aquicultura constituem um diferencial competitivo e um requisito crescente para acesso a mercados internacionais \cite{UniversoSaudeAnimal2025}. Nesse contexto, o monitoramento contínuo dos parâmetros do cativeiro é um requisito para manter a qualidade da água e, por consequência, o valor gastronômico do produto, motivação que orienta o desenvolvimento do sistema proposto neste trabalho.
 
-Para entender as condições reais de manejo na região, foi conduzida uma pesquisa de campo com participantes vinculados à carcinicultura no Vale do Ribeira, por meio de entrevistas estruturadas com roteiro de dez questões voltadas às rotinas de manejo e aos cuidados com os cativeiros. Os resultados indicaram que o manejo é realizado de forma predominantemente manual, com os responsáveis dedicando em média cinco horas diárias ao cuidado dos cativeiros e realizando a verificação dos parâmetros da água de três a quatro vezes por dia, nos períodos da manhã, tarde e noite. Os participantes relataram que já ocorreram perdas de camarões tanto por falhas na alimentação, situações em que os animais deixaram de ser alimentados, quanto por alterações nos parâmetros da água, especialmente elevação da amônia, que se converte em nitrito e compromete a qualidade do ambiente aquático. A ausência de controle automatizado da alimentação e de registro histórico dos parâmetros da água foi apontada como principal fator que dificulta a identificação precoce de alterações críticas e aumenta o risco de perdas.
+Para entender as condições reais de manejo na região, foi conduzida uma pesquisa de campo com quatro participantes vinculados à carcinicultura no Vale do Ribeira, sendo três da cidade de Registro e um da cidade de Cananeia, por meio de entrevistas estruturadas com roteiro de dez questões voltadas às rotinas de manejo e aos cuidados com os cativeiros. Os resultados indicaram que o manejo é realizado de forma predominantemente manual, com os responsáveis dedicando em média cinco horas diárias ao cuidado dos cativeiros e realizando a verificação dos parâmetros da água de três a quatro vezes por dia, nos períodos da manhã, tarde e noite. Os participantes relataram que já ocorreram perdas de camarões tanto por falhas na alimentação, situações em que os animais deixaram de ser alimentados, quanto por alterações nos parâmetros da água, especialmente elevação da amônia, que se converte em nitrito e compromete a qualidade do ambiente aquático. A ausência de controle automatizado da alimentação e de registro histórico dos parâmetros da água foi apontada como principal fator que dificulta a identificação precoce de alterações críticas e aumenta o risco de perdas.
 
 Nesse contexto, a Internet das Coisas (do inglês, \textit{Internet of Things}, ou IoT) tem se consolidado como uma abordagem promissora para o monitoramento e automação de sistemas aquícolas. A capacidade de coletar dados ambientais de forma contínua por meio de sensores conectados, transmiti-los para a nuvem e disponibilizá-los ao produtor de forma remota representa um avanço significativo em relação ao manejo manual tradicional. Estudos recentes demonstram que a adoção de sistemas baseados em IoT na carcinicultura contribui para o aumento da precisão no monitoramento da qualidade da água, a redução do tempo de resposta a alterações críticas e a melhoria dos indicadores produtivos, como taxa de sobrevivência e crescimento dos animais \cite{Uddin2020}. A integração dessas tecnologias à realidade dos produtores do Vale do Ribeira representa, portanto, uma oportunidade concreta de modernização da atividade com impacto direto na qualidade e na rentabilidade da produção.
 
@@ -133,11 +135,11 @@ Este trabalho tem como objetivo desenvolver um sistema de monitoramento automati
 \subsection{Objetivos específicos}
  
 \begin{enumerate}
-    \item Monitorar remotamente os parâmetros de temperatura, pH e amônia da água dos cativeiros, emitindo alertas automáticos ao usuário em caso de desvios nos valores esperados.
+    \item Monitorar remotamente com uso de sensores os parâmetros de temperatura, pH e amônia da água dos cativeiros, emitindo alertas automáticos ao usuário em caso de desvios nos valores esperados.
  
     \item Registrar e armazenar dados históricos dos cativeiros e das alimentações, disponibilizando relatórios e gráficos para análise das condições da água ao longo do tempo.
  
-    \item Automatizar o fornecimento de ração por meio de um dispensador controlado pelo sistema, com horários e quantidades definidos pelo usuário.
+    \item Automatizar o fornecimento de ração por meio de um dispensador controlado pelo sistema, com horários e quantidades definidas pelo usuário.
     
     \item Desenvolver uma aplicação web progressiva e responsiva, adaptável a dispositivos móveis e \textit{desktop}, que disponibilize ao produtor acesso remoto aos parâmetros monitorados e à configuração da alimentação.
  
@@ -154,7 +156,7 @@ O trabalho de \cite{dantas2020} propõe um sistema de telemonitoramento para a c
  
 O trabalho de \cite{Arifani2024} propõe um protótipo de monitoramento da qualidade da água para a criação de camarões Vannamei utilizando um microcontrolador Arduino Uno acoplado a um NodeMCU ESP8266, integrados aos sensores DS18B20 (temperatura), PH SEN0161 (pH) e um sensor de Sólidos Totais Dissolvidos (do inglês, \textit{Total Dissolved Solids}, ou TDS) para condutividade. A comunicação entre os dois microcontroladores ocorre via porta serial, com o ESP8266 responsável por transmitir os dados via Wi-Fi diretamente para o Google Planilhas (\textit{Google Sheets}), que atua como interface de armazenamento e visualização acessível remotamente por smartphone. A escolha do Google Sheets como plataforma de monitoramento foi motivada pela facilidade de acesso e baixo custo de implementação para os produtores. Os resultados dos testes indicaram acurácia de 98,59\% para o sensor TDS, 98,59\% para o sensor DS18B20 e 94,89\% para o sensor de pH robótico DF, com desvios padrão de 0,448, 0,053 e 0,258, respectivamente, evidenciando boa confiabilidade das leituras. Contudo, o estudo apresenta limitações relevantes: os próprios autores reconhecem que os resultados estão condicionados às condições ambientais específicas e à calibração dos sensores utilizada durante os testes, o que compromete a generalização do sistema para outros ambientes de cultivo. Além disso, assim como em outros trabalhos da área, o protótipo não contempla o monitoramento de oxigênio dissolvido e amônia, parâmetros críticos apontados pelos próprios autores como necessários para uma avaliação mais completa da qualidade da água em pesquisas futuras.
  
-Em termos de semelhanças metodológicas, os três trabalhos analisados fundamentam-se no uso de microcontroladores de baixo custo (ESP32, Arduino e módulos ESP8266) como núcleos de processamento, priorizam o monitoramento contínuo de parâmetros físico-químicos vitais (notadamente temperatura e pH) e empregam plataformas em nuvem para transpor a distância física entre os cativeiros e a tomada de decisão do produtor. Essas convergências demonstram um consenso acadêmico sobre a arquitetura básica de soluções IoT para a carcinicultura. Por outro lado, as soluções baseadas em conectividade Wi-Fi (\cite{Uddin2020} e \cite{Arifani2024}) compartilham a fragilidade de dependerem de infraestrutura de rede local, um gargalo relevante em áreas rurais isoladas, além da necessidade de calibração manual recorrente para manter a confiabilidade das leituras. Nenhum dos sistemas avaliados integra o controle automatizado da alimentação ao monitoramento ambiental, tratando essas duas funções intrinsecamente ligadas como responsabilidades separadas, e nenhum contempla o monitoramento de amônia, parâmetro crítico para a sobrevivência dos camarões. Em comparação, o sistema proposto neste trabalho inova ao unificar a coleta de dados e o controle ativo do cativeiro, com definição de horários e quantidades de ração, envio de alertas preventivos e monitoramento de amônia em um único ecossistema tecnológico.
+Em termos de semelhanças metodológicas, os três trabalhos analisados fundamentam-se no uso de microcontroladores de baixo custo (ESP32, Arduino e módulos ESP8266) como núcleos de processamento, priorizam o monitoramento contínuo de parâmetros físico-químicos vitais (notadamente temperatura e pH) e empregam plataformas em nuvem para transpor a distância física entre os cativeiros e a tomada de decisão do produtor. Essas convergências demonstram um consenso acadêmico sobre a arquitetura básica de soluções IoT para a carcinicultura. Por outro lado, as soluções baseadas em conectividade Wi-Fi (\cite{Uddin2020} e \cite{Arifani2024}) compartilham a fragilidade de dependerem de infraestrutura de rede local, um gargalo relevante em áreas rurais isoladas, além da necessidade de calibração manual recorrente para manter a confiabilidade das leituras. Entre os trabalhos analisados, não foi identificada uma solução que integre o controle automatizado da alimentação ao monitoramento ambiental, tratando essas duas funções intrinsecamente ligadas como responsabilidades separadas, e nenhum contempla o monitoramento de amônia, parâmetro crítico para a sobrevivência dos camarões. Em comparação, o sistema proposto neste trabalho inova ao unificar a coleta de dados e o controle ativo do cativeiro, com definição de horários e quantidades de ração, envio de alertas preventivos e monitoramento de amônia em um único ecossistema tecnológico.
 
 % Metodologia
 \section{Materiais e Métodos}
@@ -222,12 +224,12 @@ O ciclo de leitura dos parâmetros e a transmissão dos pacotes via \textit{Wi-F
 O sensor de pH foi ajustado utilizando uma solução-padrão de pH 7,00. Durante o procedimento, o potenciômetro da placa de condicionamento de sinal foi ajustado manualmente com uma chave de fenda, utilizando a solução como referência.
  
 O controle da alimentação é realizado de forma integrada entre o ESP32 e a API. No horário programado, o ESP32 consulta a API para obter a configuração de dieta ativa do cativeiro, verificando o horário e a quantidade de ração definidos pelo usuário. Com base nessa resposta, o ESP32 aciona o motor do dispensador, libera a quantidade configurada e envia uma confirmação à API, que registra a alimentação realizada e notifica o usuário. Essa arquitetura garante que as configurações de alimentação sejam sempre gerenciadas de forma centralizada pela aplicação, permitindo que o usuário altere horários e quantidades remotamente sem necessidade de reconfiguração física do equipamento.
+
+A quantidade de ração é dosada por uma rotina de calibração do dispensador: o motor executa um número conhecido de rotações $R$ e a ração dispensada é pesada ($G$, em gramas). O peso é enviado à API, que calcula a massa dispensada por rotação, $\mathrm{GPR} = G/R$, grava o valor no cativeiro e o disponibiliza ao ESP32. A cada acionamento, o número de rotações necessário para a quantidade configurada pelo usuário, $G_c$, é $R = G_c/\mathrm{GPR}$.
  
 \subsection{Funcionalidades da Aplicação Web}
  
 A interface da aplicação foi estruturada para oferecer ao produtor uma visão centralizada e intuitiva de seus cativeiros. A tela principal exibe todos os cativeiros cadastrados pelo usuário, permitindo a seleção individual de cada um para acesso às informações detalhadas. Ao acessar um cativeiro específico, o usuário visualiza os valores atuais de temperatura, pH e amônia coletados pelo ESP32 a cada minuto, acompanhados de gráficos históricos semanais que permitem identificar tendências e variações nas condições da água ao longo do tempo. Os limites ideais de cada parâmetro são definidos pelo próprio usuário no momento do cadastro do cativeiro, de acordo com as características da espécie cultivada e as condições locais de produção. Quando uma leitura ultrapassa os limites configurados, o sistema classifica automaticamente a severidade do desvio e aciona dois canais de alerta simultaneamente: uma notificação \textit{push} enviada diretamente ao dispositivo móvel do usuário e um e-mail com os detalhes do parâmetro fora do limite, garantindo que o produtor seja informado independentemente de estar com a aplicação aberta no momento do evento.
- 
-O controle da alimentação é realizado diretamente pela plataforma, onde o usuário define, para cada cativeiro, os horários das alimentações (o número de horários corresponde ao número de alimentações diárias) e a quantidade de ração por alimentação. Essas configurações são armazenadas no banco de dados em nuvem e utilizadas pelo ESP32 para acionar o dispensador, registrando cada alimentação realizada. O histórico de alimentações fica disponível na plataforma, permitindo ao produtor acompanhar se os ciclos de alimentação estão sendo executados corretamente ao longo do tempo.
  
 O sistema contempla ainda diferentes níveis de acesso, com permissões distintas para cada perfil de usuário. O proprietário do cativeiro possui acesso completo às funcionalidades da plataforma, incluindo cadastro e gerenciamento de cativeiros, configuração de alertas e dietas, e visualização de relatórios. Funcionários cadastrados têm acesso restrito às informações operacionais, sem permissão para alterar configurações críticas do sistema. Essa estrutura de controle de acesso contribui para a segurança operacional e permite que múltiplos colaboradores utilizem a plataforma sem alterar as configurações definidas pelo proprietário.
  
@@ -239,16 +241,23 @@ A validação foi realizada em um aquário dividido em duas seções independent
 Em cada teste, os sensores permaneceram na amostra por 30 minutos, com leituras a cada 1 minuto, e o valor do sensor adotado foi a média das leituras do período; entre um teste e o seguinte houve um intervalo de 30 minutos. Os valores de referência foram obtidos simultaneamente, com instrumentos de uso aquarístico: o termômetro OceanTech ST-3, o kit colorimétrico de pH OceanTech High Precision (20 mL) e o kit colorimétrico de amônia Induspharma (30 mL). Por serem instrumentos de baixo custo, sua exatidão e resolução limitam a incerteza da comparação, o que é considerado na análise dos resultados. O MQ-135 foi posicionado no ar, acima da superfície da água, e mede a concentração do gás na fase gasosa; seus valores não são diretamente comparáveis aos do kit colorimétrico, que mede a amônia dissolvida na água.
  
 \subsection{Análise dos Dados}
- 
-Para cada parâmetro, foram calculados, a partir do valor do sensor $s_i$ e do valor de referência $r_i$ no teste $i$ ($n = 6$), o erro $e_i = s_i - r_i$ e as métricas a seguir:
- 
+
+Para cada parâmetro, foram calculadas as métricas a seguir, a partir do valor do sensor $s_i$ e do valor de referência $r_i$ no teste $i$ ($n = 6$):
+
 \begin{equation}
+\begin{array}{c}
+\displaystyle
+e_i = s_i - r_i, \qquad
 \bar{e} = \frac{1}{n}\sum_{i=1}^{n} e_i, \qquad
-\mathrm{EAM} = \frac{1}{n}\sum_{i=1}^{n} |e_i|, \qquad
-\mathrm{DP} = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}\left(e_i-\bar{e}\right)^2},
+\mathrm{EAM} = \frac{1}{n}\sum_{i=1}^{n} |e_i|, \\[4mm]
+\displaystyle
+\mathrm{DP} = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}\left(e_i-\bar{e}\right)^2}, \qquad
+\mathrm{EPM} = \frac{100}{n}\sum_{i=1}^{n} \frac{|e_i|}{r_i}, \qquad
+\mathrm{PM} = 100 - \mathrm{EPM},
+\end{array}
 \end{equation}
- 
-\noindent em que $\bar{e}$ é o viés (erro sistemático), EAM é o erro absoluto médio e DP é o desvio-padrão do erro. Para comparação com a literatura, que reporta o desempenho em percentual, calculou-se também o erro percentual médio, $\mathrm{EPM} = \frac{100}{n}\sum_{i=1}^{n} |e_i|/r_i$, e a exatidão percentual, $100 - \mathrm{EPM}$. Como o erro percentual de temperatura e de pH depende da escala (graus Celsius, escala logarítmica de pH), as métricas em valores absolutos são as de referência neste trabalho.
+
+\noindent em que $e_i$ é o erro, $\bar{e}$ é o viés (erro sistemático), EAM é o erro absoluto médio, DP é o desvio-padrão do erro, EPM é o erro percentual médio e PM é a precisão média. O erro percentual é reportado para comparação com a literatura, mas, como depende da escala (graus Celsius, escala logarítmica de pH), as métricas em valores absolutos são apresentadas junto às percentuais.
  
 A viabilidade técnica foi analisada pelos seguintes critérios: (i) para temperatura e pH, comparação das leituras do sensor com os valores dos instrumentos de referência; (ii) recebimento dos alertas pelo usuário nos dois canais e o tempo decorrido; (iii) operação contínua do ESP32 durante os testes; (iv) funcionamento das funcionalidades da aplicação web e do dispensador de ração.
  
@@ -279,6 +288,10 @@ A Tabela \ref{tab:sensores} apresenta os resultados comparativos obtidos em cada
 \begin{table}[H]
 \centering
 \caption{Comparação entre valores de referência e leituras do sensor ESP32}
+\label{tab:sensores}
+
+\small
+\setlength{\tabcolsep}{5pt}
 \begin{tabular}{ccccc}
 \hline
 \textbf{Teste} & \textbf{Temp. Real (°C)} & \textbf{Temp. Sensor (°C)} & \textbf{pH Real} & \textbf{pH Sensor} \\
@@ -297,10 +310,30 @@ A Tabela \ref{tab:sensores} apresenta os resultados comparativos obtidos em cada
 
 \vspace{2mm}
 {\small Erro percentual = |sensor $-$ referência| / referência; precisão média = 100\% $-$ erro percentual médio. Testes 1 e 6 no cativeiro; demais em amostras (Seção~\ref{sec:validacao-sensores}).}
-\label{tab:sensores}
+
 \end{table}
 
-O sensor de temperatura apresentou erro absoluto médio de 0,37°C (desvio-padrão de 0,13°C) ao longo dos seis testes, cobrindo uma faixa de 17,0°C a 26,0°C, o que corresponde a um erro percentual médio de 1,73\% e a uma precisão média de 98,27\%. Em todos os testes o sensor registrou valores abaixo da referência (viés de $-0{,}37$°C), com erros absolutos não superiores a 0,5°C. Por a referência ser um termômetro de uso aquarístico, o resultado indica compatibilidade entre as leituras, e não exatidão absoluta do sensor.
+\begin{table}[H]
+\centering
+\caption{Métricas de desempenho do sensor de temperatura ($n = 6$)}
+\label{tab:metricas-temperatura}
+\small
+\begin{tabular}{lc}
+\hline
+\textbf{Métrica} & \textbf{Valor} \\
+\hline
+Faixa de temperatura testada & 17,0°C a 26,0°C \\
+Erro absoluto médio & 0,37°C \\
+Desvio-padrão do erro & 0,13°C \\
+Viés (erro médio com sinal) & $-0{,}37$°C \\
+Maior erro absoluto & 0,50°C \\
+Erro percentual médio & 1,73\% \\
+Precisão média & 98,27\% \\
+\hline
+\end{tabular}
+\end{table}
+
+A Tabela~\ref{tab:metricas-temperatura} resume o desempenho do sensor de temperatura. Em todos os testes o sensor registrou valores abaixo da referência, com erros absolutos não superiores a 0,5°C. Como a referência é um termômetro de uso aquarístico, o resultado indica compatibilidade entre as leituras, e não exatidão absoluta do sensor.
 
 O sensor de pH apresentou erro absoluto médio de 0,29 (desvio-padrão de 0,20), correspondente a um erro percentual médio de 4,02\% e a uma precisão média de 95,98\%. Em todos os testes o sensor registrou valores abaixo da referência: nos testes 1, 2, 3 e 6 (referência 7,0) registrou 6,79 e, no teste 4 (referência 5,0), registrou 4,80, diferenças de 0,21 e 0,20, praticamente constantes, o que indica um desvio sistemático e não uma imprecisão aleatória. Como o sensor foi ajustado em solução-padrão de pH 7,00 antes dos testes, a origem desse desvio pode estar no sensor ou na resolução do kit colorimétrico de referência, e os dados disponíveis não permitem distingui-la.
 
@@ -312,9 +345,6 @@ O protótipo do dispensador de ração foi acionado nos seis testes de validaç�
 
 \subsection{Tempo de Resposta do Sistema de Alertas}
 Em todos os seis testes de validação, o ESP32 enviou as leituras à API no ciclo regular de 1 minuto. A API avalia cada leitura no momento em que a recebe e, quando um limite é ultrapassado, dispara o alerta de imediato, de modo que o usuário recebeu a notificação \textit{push} e o e-mail sem atraso perceptível após a chegada da leitura. O atraso máximo entre a ocorrência do evento e o alerta fica, portanto, limitado ao intervalo de leitura de 1 minuto, compatível com a rotina descrita pelos participantes da pesquisa de campo, que verificam a água de três a quatro vezes por dia.
-
-\subsection{Estabilidade Operacional do ESP32}
-O ESP32 operou de forma contínua ao longo dos testes, totalizando cerca de cinco horas e meia de funcionamento, sem reinicializações observadas. Durante esse período, foi simulada uma interrupção de conectividade \textit{Wi-Fi} por meio da troca do ponto de acesso à rede. Após o restabelecimento da conexão, o envio das leituras foi retomado. Como o firmware não armazena leituras localmente, as leituras do período de interrupção não foram registradas, o que constitui uma limitação do sistema atual.
 
 % Conclusão
 \section{Conclusão}
