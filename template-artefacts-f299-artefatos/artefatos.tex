@@ -158,7 +158,7 @@ O Business Model Canvas é uma ferramenta visual estratégica que permite descre
 \hline
 \textbf{Parcerias Principais} & \textbf{Atividades Chave} & \textbf{Proposta de Valor} & \textbf{Relacionamento} & \textbf{Segmentos} \\
 \hline
-Fornecedores de sensores e microcontroladores (ESP32), provedores de infraestrutura em nuvem (Vercel, Render), consultores técnicos em carcinicultura & Coleta e interpretação de dados de temperatura, pH e amônia; geração de alertas em tempo real; manutenção da plataforma e dos sensores & Redução do tempo de manejo manual (de cerca de 5h/dia para monitoramento automatizado), alertas imediatos, maior precisão no controle da qualidade da água & Suporte técnico contínuo, treinamentos de uso, canal direto via chat/WhatsApp com a empresa & Pequenos e médios produtores de camarão e cooperativas de carcinicultura \\
+Fornecedores de sensores e microcontroladores (ESP32), provedores de infraestrutura em nuvem (Vercel, Render), consultores técnicos em carcinicultura & Coleta e interpretação de dados de temperatura, pH e amônia; geração de alertas em tempo real; manutenção da plataforma e dos sensores & Potencial de redução do manejo manual (cerca de 5h/dia segundo pesquisa de campo), alertas imediatos, maior precisão no controle da qualidade da água & Suporte técnico contínuo, treinamentos de uso, canal direto via chat/WhatsApp com a empresa & Pequenos e médios produtores de camarão e cooperativas de carcinicultura \\
 \hline
  & \textbf{Recursos Principais} & & \textbf{Canais} & \\
 \hline
@@ -194,7 +194,7 @@ A Análise SWOT (\textit{Strengths, Weaknesses, Opportunities, Threats}), ou FOF
 \hline
 \textbf{FORÇAS (Strengths)} & \textbf{FRAQUEZAS (Weaknesses)} \\
 \hline
-\begin{minipage}[t]{7cm}
+\begin{minipage}[t]{7cm}\raggedright
 \begin{itemize}
     \item Sistema integrado que reúne monitoramento da água, alertas e programação remota da alimentação em uma única plataforma
     \item Alertas gerados a cada leitura recebida (leituras a cada minuto), por notificação \textit{push} e e-mail
@@ -204,7 +204,7 @@ A Análise SWOT (\textit{Strengths, Weaknesses, Opportunities, Threats}), ou FOF
 \end{itemize}
 \end{minipage}
 &
-\begin{minipage}[t]{7cm}
+\begin{minipage}[t]{7cm}\raggedright
 \begin{itemize}
     \item Monitoramento de amônia não validado: o sensor utilizado detecta gás no ar, e não amônia dissolvida
     \item Dependência de Wi-Fi e da API: o firmware não armazena leituras durante quedas de conexão
@@ -219,7 +219,7 @@ A Análise SWOT (\textit{Strengths, Weaknesses, Opportunities, Threats}), ou FOF
 \hline
 \textbf{OPORTUNIDADES (Opportunities)} & \textbf{AMEAÇAS (Threats)} \\
 \hline
-\begin{minipage}[t]{7cm}
+\begin{minipage}[t]{7cm}\raggedright
 \begin{itemize}
     \item Crescimento do mercado de aquicultura e da demanda por rastreabilidade/sustentabilidade na produção
     \item Parcerias com instituições de pesquisa (ex: universidades) para validação científica e captação de fomento
@@ -228,7 +228,7 @@ A Análise SWOT (\textit{Strengths, Weaknesses, Opportunities, Threats}), ou FOF
 \end{itemize}
 \end{minipage}
 &
-\begin{minipage}[t]{7cm}
+\begin{minipage}[t]{7cm}\raggedright
 \begin{itemize}
     \item Cobertura \textit{Wi-Fi} limitada em propriedades rurais do Vale do Ribeira, exigindo soluções de conectividade alternativas
     \item Surtos de doenças no cultivo (ex: mancha branca), que afetam a demanda por qualquer tecnologia de manejo, independente de sua eficácia
@@ -372,7 +372,23 @@ A Unified Modeling Language (UML) \cite{booch2005} é uma linguagem de modelagem
 
 \subsection{Diagrama de Casos de Uso}
 
-O diagrama identifica quatro atores principais e suas interações com o sistema: o Equipamento IoT, o Funcionário, o Dono e a Equipe técnica, cada um com permissões e funcionalidades específicas.
+O diagrama identifica quatro atores principais e suas interações com o sistema: o Equipamento IoT, o Funcionário, o Dono e a Equipe técnica, cada um com permissões e funcionalidades específicas. A Tabela~\ref{tab:perfis} apresenta a correspondência entre os perfis funcionais descritos no artigo e os papéis técnicos implementados na API.
+
+\begin{table}[H]
+\centering
+\caption{Correspondência entre perfis funcionais e papéis técnicos}
+\label{tab:perfis}
+\small
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Perfil funcional} & \textbf{Ator (casos de uso)} & \textbf{Role na API} \\
+\hline
+Proprietário & Dono & \texttt{master} \\
+Funcionário & Funcionário & \texttt{membro} \\
+--- & Equipe técnica & \texttt{admin} \\
+\hline
+\end{tabular}
+\end{table}
 
 \begin{figure}[H]
     \centering
@@ -1027,13 +1043,13 @@ services:
 \end{verbatim} 
 
 \subsection{Monitoramento e Alertas}
-O sistema possui um serviço de monitoramento automático que verifica periodicamente os parâmetros dos cativeiros:
+A API avalia cada leitura no momento em que a recebe do ESP32 (a cada 1 minuto). Quando um parâmetro ultrapassa os limites configurados pelo usuário, o alerta é disparado de imediato:
 \begin{itemize}
-    \item \textbf{Intervalo de Verificação:} Definido por variável de ambiente (\texttt{MONITORING\_\allowbreak INTERVAL\_\allowbreak MINUTES}, padrão: 5 minutos)
+    \item \textbf{Avaliação:} Síncrona, a cada leitura recebida pela API (ciclos de 1 minuto)
     \item \textbf{Parâmetros Monitorados:} Temperatura, pH e Amônia
     \item \textbf{Tolerâncias:} Temperatura (15\%), pH (20\%), Amônia (25\%)
-    \item \textbf{Severidade:} Classificação automática em \texttt{media} ou \texttt{alta}
-    \item \textbf{Canais de Alerta:} E-mail (Gmail SMTP via Nodemailer) com respeito a quiet hours e rate limitingdia
+    \item \textbf{Severidade:} Classificação automática conforme o desvio em relação aos limites
+    \item \textbf{Canais de Alerta:} Notificação \textit{push} (Web Push, protocolo VAPID) e e-mail (Gmail SMTP via Nodemailer), com respeito a \textit{quiet hours} e \textit{rate limiting}
     \item \textbf{Health Check:} Endpoint \texttt{/api/health} para verificação do status da API e banco de dados
 \end{itemize}
 
@@ -1062,7 +1078,7 @@ Os testes realizados tiveram como finalidade verificar o funcionamento básico d
 
 No âmbito do desenvolvimento e da manutenção do software, a utilização de ferramentas de versionamento, automação de testes, conteinerização e integração contínua contribuiu para organizar o processo de desenvolvimento e padronizar as verificações realizadas antes da disponibilização das aplicações. O pipeline de CI/CD foi configurado e executado com sucesso, demonstrando a viabilidade da automação adotada no projeto.
 
-Dessa forma, considera-se que os objetivos propostos para o desenvolvimento do protótipo foram alcançados, demonstrando a viabilidade da integração entre hardware, software e serviços em nuvem para apoiar o monitoramento da criação de camarões em cativeiro. Embora a solução ainda apresente limitações que podem ser trabalhadas em versões futuras, os resultados obtidos constituem uma base para evoluções, como o aprimoramento da precisão das medições, a ampliação dos testes em ambientes reais e a inclusão de novos recursos de acompanhamento e análise.
+O desenvolvimento do protótipo permitiu implementar as funcionalidades previstas e integrar os componentes de hardware e software. Entretanto, a validação experimental não contemplou satisfatoriamente todos os parâmetros monitorados, especialmente a amônia, cuja medição permaneceu sem comprovação de funcionamento. Dessa forma, embora a estrutura principal da solução tenha sido desenvolvida, algumas metas de validação permanecem como limitações do projeto, e os resultados obtidos constituem uma base para evoluções futuras.
 
 \vspace{1cm}
 \noindent\rule{\textwidth}{0.5pt}
