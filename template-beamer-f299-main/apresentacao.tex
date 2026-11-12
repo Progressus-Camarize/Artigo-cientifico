@@ -6,6 +6,10 @@
 \usepackage[brazilian]{babel}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{array}
+\usepackage{ragged2e}
+
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 
 % Fonte moderna Roboto
 \usepackage[sfdefault]{roboto}
@@ -193,7 +197,7 @@
 \begin{table}
     \centering
     \tiny
-    \begin{tabular}{|p{2.5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{1.5cm}|}
+    \begin{tabular}{|L{2.5cm}|L{2cm}|L{2cm}|L{2cm}|L{2cm}|L{1.5cm}|}
       \hline
       \textbf{Título/Autores} & \textbf{Objetivo} & \textbf{Método} & \textbf{Resultados} & \textbf{Limitações} & \textbf{Gap} \\
       \hline
@@ -321,7 +325,7 @@
 \begin{frame}[b]{Resultados e Discussões}
 \begin{itemize}
   \item \parbox{0.60\textwidth}{Principais \textbf{resultados} alcançados: monitoramento em tempo real, alertas automáticos e controle remoto da alimentação}
-  \item \parbox{0.60\textwidth}{Análise de \textbf{métricas}: precisão de 98,27\% (temperatura) e 95,98\% (pH), alertas em ~2 minutos}
+  \item \parbox{0.60\textwidth}{Análise de \textbf{métricas}: precisão de 98,27\% (temperatura) e 95,98\% (pH), alertas em 1 minuto}
   \item \parbox{0.60\textwidth}{Feedback dos \textbf{usuários}: 6 testes em ambiente real, interface aprovada em usabilidade}
   \item \parbox{0.60\textwidth}{\textbf{Desafios}: sensor MQ-135 limitado em meio aquático e instabilidade mecânica no dispensador}
   \item \parbox{0.60\textwidth}{Contribuições e \textbf{aprendizados}: viabilidade técnica de sistema IoT unificado de baixo custo}
