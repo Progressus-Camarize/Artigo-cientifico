@@ -158,6 +158,7 @@
   
   \hfill{\scriptsize \textbf{Duração:} 10 a 11 min.}
 \end{frame}
+}
 
 \section{Pitch}
 {
@@ -205,7 +206,7 @@
       \hline
       Monitoramento em tempo real para fazendas de camarão de água doce — Uddin (2020) & Monitorar qualidade da água e taxa de sobrevivência em cultivo real & Arduino Yun com sensores múltiplos, método AHP em nuvem e notificações web & 4.600+ registros, erro inferior a 7\%, sobrevivência de 90\% & Dependência exclusiva de Wi-Fi e necessidade de calibração manual frequente & Sem automação da alimentação e sem monitoramento de amônia \\
       \hline
-      Monitoramento via rede de sensores sem fio em viveiro de vannamei — Zainuddin (2019) & Monitorar temperatura, pH e turbidez em múltiplos pontos do viveiro & WSN com Atmega 2560/328, módulos Xbee (Zigbee) e ESP8266 & Acurácia de 97,75\% para temperatura, 98,85\% para pH e 99,73\% para turbidez & Sem redundância de hardware e limitações de escalabilidade & Sem controle de alimentação e sem alertas preventivos \\
+      Protótipo de monitoramento da qualidade da água em cultivo de camarão Vannamei com IoT utilizando Google Planilhas — Wisaksono (2024) & Monitorar a qualidade da água no cultivo de camarão Vannamei com acesso remoto via smartphone & Arduino Uno acoplado a NodeMCU ESP8266 via porta serial, com sensores de temperatura, PH e TDS; dados enviados por Wi-Fi para o Google Planilhas & Acurácia de 98,59\% (TDS), 98,59\% (DS18B20) e 94,89\% (pH), com desvios padrão de 0,448, 0,053 e 0,258 & Resultados dependem das condições ambientais específicas e da calibração dos sensores, limitando a generalização; & Sem controle de alimentação e sem alertas preventivos \\
       \hline
     \end{tabular}
   \end{table}
@@ -264,7 +265,7 @@
 \usebackgroundtemplate{}
 \begin{frame}[t]{Metodologia}
   \centering
-  \includegraphics[width=0.8\paperwidth,keepaspectratio]{imgs/diagrama-iot-camarize.png}
+  \includegraphics[width=0.92\paperwidth,height=0.75\textheight,keepaspectratio]{imgs/diagrama-iot-camarize.png}
 \end{frame}
 }
 
@@ -272,7 +273,7 @@
 \usebackgroundtemplate{}
 \begin{frame}[t]{Metodologia}
   \centering
-  \includegraphics[width=0.8\paperwidth,keepaspectratio]{imgs/fluxograma-camarize.png}
+  \includegraphics[width=0.92\paperwidth,height=0.75\textheight,keepaspectratio]{imgs/fluxograma-camarize.png}
 \end{frame}
 }
 
@@ -327,9 +328,9 @@
   \item \parbox{0.60\textwidth}{Principais \textbf{resultados} alcançados: monitoramento em tempo real, alertas automáticos e controle remoto da alimentação}
   \item \parbox{0.60\textwidth}{Análise de \textbf{métricas}: precisão de 98,27\% (temperatura) e 95,98\% (pH), alertas em 1 minuto}
   \item \parbox{0.60\textwidth}{Feedback dos \textbf{usuários}: 6 testes em ambiente real, interface aprovada em usabilidade}
-  \item \parbox{0.60\textwidth}{\textbf{Desafios}: sensor MQ-135 limitado em meio aquático e instabilidade mecânica no dispensador}
+  \item \parbox{0.60\textwidth}{\textbf{Desafios}: sensor MQ-135 limitado em meio aquático}
   \item \parbox{0.60\textwidth}{Contribuições e \textbf{aprendizados}: viabilidade técnica de sistema IoT unificado de baixo custo}
-  \item \parbox{0.60\textwidth}{\textbf{Trabalhos futuros}: sensor íon-seletivo submersível, redesenho do dispensador e validação em cativeiro comercial}
+  \item \parbox{0.60\textwidth}{\textbf{Trabalhos futuros}: sensor íon-seletivo submersível e validação em cativeiro comercial}
 \end{itemize}
   
   \vfill
